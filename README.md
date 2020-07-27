@@ -3,6 +3,8 @@ a test for git using
 
 https://www.cnblogs.com/cxk1995/p/5800196.html
 
+https://www.cnblogs.com/qhorse/p/9599794.html
+
 ## 创建
 
 git clone https://github.com/lenkasetGitHub/GitTest.git
