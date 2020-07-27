@@ -6,17 +6,20 @@ export class PropertyConstructure implements IPropertyConstructure {
   type: PropertyType = PropertyType.NONE;
   groupName: string = "";
   index: number = -1;
+  isReadonly: boolean = false;
   value: any = {};
   minValue: any = {};
   maxValue: any = {};
   displayStrs: string[] = [];
   values: any[] = [];
+  children: any[] = [];
 
-  constructor(name: string, displayName: string, groupName: string, index: number) {
+  constructor(name: string, displayName: string, groupName: string, index: number, isReadonly: boolean = false) {
     this.name = name;
     this.displayName = displayName;
     this.groupName = groupName;
     this.index = index;
+    this.isReadonly = isReadonly;
   }
 
   public setText(value: string): PropertyConstructure {
@@ -27,14 +30,13 @@ export class PropertyConstructure implements IPropertyConstructure {
 
   public setRange(value: number, min: number, max: number, isInteger: boolean = false): PropertyConstructure {
     this.type = isInteger ? PropertyType.RANGE_INTEGER : PropertyType.RANGE_DECIMAL;
-    console.log(this.type)
     this.value = value;
     this.minValue = min;
     this.maxValue = max;
     return this;
   }
 
-  public setSelection(value: string, strs: string[], vals: any[]): PropertyConstructure {
+  public setSelection(value: any, strs: string[], vals: any[]): PropertyConstructure {
     this.type = PropertyType.SELECTION;
     this.value = value;
     this.displayStrs = strs;
@@ -47,6 +49,12 @@ export class PropertyConstructure implements IPropertyConstructure {
     this.value = value;
     this.displayStrs = boolStrs;
     this.values = boolVals;
+    return this;
+  }
+
+  public setChildren(children: Array<PropertyConstructure[]>): PropertyConstructure {
+    this.type = PropertyType.LIST;
+    this.children = children;
     return this;
   }
 }

@@ -1,8 +1,10 @@
 import React, { Component } from "react"
 import "../styles/TextControl.less"
-import { Select, Form } from "antd";
-import RadioGroup from "antd/lib/radio/group";
-import RadioButton from "antd/lib/radio/radioButton";
+import antd, { Select, Form } from "antd";
+
+var RadioButton = antd.Radio.Button;
+var RadioGroup = antd.Radio.Group;
+
 
 interface ISeelctionProps {
   name: string;
@@ -21,8 +23,12 @@ class SelectionControl extends Component<ISeelctionProps> {
     super(props);
   }
 
-  selectChanged(value: any) {
+  selectOptionChanged(value: any) {
     this.props.OnSelectionChanged?.(this.props.name, value);
+  }
+
+  selectRadioChanged(e: any) {
+    this.props.OnSelectionChanged?.(this.props.name, e.target.value);
   }
 
   renderOptions() {
@@ -48,11 +54,11 @@ class SelectionControl extends Component<ISeelctionProps> {
       <Form.Item label={`${this.props.displayName} :`}>
         {
           this.props.items.length <= 3 ?
-            <RadioGroup id={this.Id} value={this.props.selectedItem} onChange={this.selectChanged.bind(this)}>
+            <RadioGroup id={this.Id} defaultValue={this.props.selectedItem} onChange={this.selectRadioChanged.bind(this)}>
               {this.renderGroups()}
             </RadioGroup>
             :
-            <Select id={this.Id} value={this.props.selectedItem} onChange={this.selectChanged.bind(this)}>
+            <Select id={this.Id} defaultValue={this.props.selectedItem} onChange={this.selectOptionChanged.bind(this)}>
               {this.renderOptions()}
             </Select>
         }

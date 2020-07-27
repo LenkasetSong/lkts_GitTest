@@ -24,9 +24,12 @@ class RangeControl extends Component<IRangeProps, any> {
   }
 
   valueChanged(value: any) {
-    if (value <= this.props.max || value >= this.props.min) {
-      this.setState({ currentValue: value });
-      this.props.OnValueChanged?.(this.props.name, value);
+    var re = /^[0-9]+.?[0-9]*/;//判断字符串是否为数字//判断正整数/[1−9]+[0−9]∗]∗/
+    if (re.test(value)) {
+      if (value <= this.props.max || value >= this.props.min) {
+        this.setState({ currentValue: value });
+        this.props.OnValueChanged?.(this.props.name, value);
+      }
     }
   }
 
@@ -40,7 +43,7 @@ class RangeControl extends Component<IRangeProps, any> {
 
   limitDecimals = (value: string | number | undefined): string => {
     const reg = /^(\-)*(\d+)\.(\d\d).*$/;
-    // console.log(value);
+    //console.log(value);
     if (typeof value === 'string') {
       return !isNaN(Number(value)) ? value.replace(reg, '$1$2.$3') : '';
     } else if (typeof value === 'number') {
@@ -55,15 +58,15 @@ class RangeControl extends Component<IRangeProps, any> {
       <Form.Item label={`${this.props.displayName} :`}>
         <Form.Item noStyle rules={[{ required: true, message: '该属性不能为空' }]}>
           <InputNumber min={this.props.min} max={this.props.max} value={this.state.currentValue} step={this.props.isInteger ? 1 : 0.01}
-            onChange={this.valueChanged.bind(this)} formatter={this.limitDecimals} parser={this.limitDecimals} />
+            onChange={this.valueChanged.bind(this)} /*formatter={this.limitDecimals} parser={this.limitDecimals}*/ />
         </Form.Item>
-        {/* <Slider min={this.props.min} max={this.props.max} value={this.state.currentValue} step={0.01}
-            onChange={this.onChange.bind(this)} onAfterChange={this.onAfterChange.bind(this)}></Slider> */}
         <Tooltip title="取值范围">
           <a href="##" style={{ margin: '0px 20px' }}>
             {this.props.min} ~ {this.props.max} {this.props.isInteger ? '整数' : '小数'}
           </a>
         </Tooltip>
+        {/* <Slider min={this.props.min} max={this.props.max} value={this.state.currentValue} step={this.props.isInteger ? 1 : 0.01}
+          onChange={this.onChange.bind(this)} onAfterChange={this.onAfterChange.bind(this)}></Slider> */}
       </Form.Item>
     )
   }
