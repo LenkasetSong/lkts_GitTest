@@ -1,6 +1,8 @@
 # GitTest
 a test for git using
 
+start：https://www.cnblogs.com/ql123456/p/10626810.html
+
 git push：https://www.cnblogs.com/cxk1995/p/5800196.html
 
 git init：https://www.cnblogs.com/ql123456/p/10626810.html
