@@ -30,3 +30,17 @@ git add .
 git commit  -m  "提交信息"
 
 git push -u origin master
+
+## 创建.gitignore文件
+1) 常规的windows操作
+
+根目录下创建gitignore.txt；
+编辑gitignore.txt，写下你的规则，例如加上node_modules/；
+打开命令行窗口，切换到根目录（可以直接在文件夹上面的地址栏输入cmd回车）；
+执行命令ren gitignore.txt .gitignore。
+
+2) 用Git Bash
+
+根目录下右键选择“Git Bash Here”进入bash命令窗口；
+输入vim .gitignore或touch .gitignore命令，打开文件（没有文件会自动创建）；
+按i键切换到编辑状态，输入规则，例如node_modules/，然后按Esc键退出编辑，输入:wq保存退出。
